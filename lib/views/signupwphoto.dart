@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const signup());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class signup extends StatelessWidget {
+  const signup({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,8 @@ class SignUpScreen extends StatelessWidget {
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
                   ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 ),
               ),
               const SizedBox(height: 15),
@@ -105,7 +106,8 @@ class SignUpScreen extends StatelessWidget {
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
                   ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 ),
               ),
               const SizedBox(height: 15),
@@ -129,7 +131,8 @@ class SignUpScreen extends StatelessWidget {
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
                   ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 ),
               ),
               const SizedBox(height: 15),
@@ -153,7 +156,8 @@ class SignUpScreen extends StatelessWidget {
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
                   ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 ),
               ),
               const SizedBox(height: 30),

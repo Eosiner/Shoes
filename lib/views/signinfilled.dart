@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-
 void main() {
-  runApp(const MyApp());
+  runApp(const signinfilled());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class signinfilled extends StatelessWidget {
+  const signinfilled({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -114,8 +113,7 @@ class SignInScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.grey),
                   ),
                   TextButton(
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                     child: const Text(
                       'Sign Up',
                       style: TextStyle(

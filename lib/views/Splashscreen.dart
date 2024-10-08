@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/views/signinempty.dart';
+import 'package:shoes/views/signup.dart';
+
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Splashscreen());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Splashscreen extends StatelessWidget {
+  const Splashscreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +35,8 @@ class LoginScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                  'assets/shoeslogo.jpg',
-                  height: 100,
+                'assets/shoeslogo.jpg',
+                height: 100,
               ),
               const SizedBox(height: 48),
               const Text(
@@ -53,7 +56,12 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 48),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const signinempty()));
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF1F41BB),
                   minimumSize: const Size(double.infinity, 50),
@@ -78,7 +86,10 @@ class LoginScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.grey),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const signup()));},
                     child: const Text(
                       'Sign In',
                       style: TextStyle(

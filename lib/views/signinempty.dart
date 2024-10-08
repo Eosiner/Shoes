@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const signinempty());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class signinempty extends StatelessWidget {
+  const signinempty({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class SignInScreen extends StatelessWidget {
                 alignment: Alignment.centerRight, // Mengatur teks ke kanan
                 child: const Text(
                   'Welcome Back,\nExplorer!',
-                  textAlign: TextAlign.right,  // Teks diratakan ke kanan
+                  textAlign: TextAlign.right, // Teks diratakan ke kanan
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
