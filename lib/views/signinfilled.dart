@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'splashscreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -113,7 +114,8 @@ class SignInScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.grey),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                    },
                     child: const Text(
                       'Sign Up',
                       style: TextStyle(

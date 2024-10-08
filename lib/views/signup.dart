@@ -74,22 +74,28 @@ class MyApp extends StatelessWidget {
                 const SizedBox(height: 30),
                 _buildTextField('Full Name'),
                 const SizedBox(height: 20),
-                _buildTextField('Email Adress'),
+                _buildTextField('Email Address'),
                 const SizedBox(height: 20),
                 _buildTextField('Password', isPassword: true),
                 const SizedBox(height: 20),
                 _buildTextField('Confirm Password', isPassword: true),
                 const SizedBox(height: 30),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1F41BB),
-                    shape: CircleShape(),
-                    padding: const EdgeInsets.all(16),
+                // Ganti ElevatedButton dengan Container
+                Container(
+                  width: 60, // Lebar tombol
+                  height: 60, // Tinggi tombol
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: const Color(0xFF1F41BB),
                   ),
-                  child: const Icon(
-                    Icons.arrow_forward,
-                    color: Colors.white,
+                  child: TextButton(
+                    onPressed: () {
+                      // Tambahkan logika untuk berpindah halaman di sini
+                    },
+                    child: const Icon(
+                      Icons.arrow_forward,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],
@@ -116,10 +122,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}
-
-class CircleShape extends RoundedRectangleBorder {
-  const CircleShape() : super(
-
-  );
 }
