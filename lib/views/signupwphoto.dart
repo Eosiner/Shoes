@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/views/confirmationsignup.dart';
 
-void main() {
-  runApp(const signupwphoto());
-}
-
 class signupwphoto extends StatelessWidget {
   const signupwphoto({super.key});
 

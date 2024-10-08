@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shoes/views/signinempty.dart';
 import 'package:shoes/views/signup.dart';
 
-
-void main() {
-  runApp(const Splashscreen());
-}
-
 class Splashscreen extends StatelessWidget {
   const Splashscreen({super.key});
 

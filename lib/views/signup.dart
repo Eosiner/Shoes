@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/views/signupwphoto.dart';
 
-void main() {
-  runApp(const signup());
-}
-
 class signup extends StatelessWidget {
   const signup({super.key});
 
@@ -60,6 +56,7 @@ class SignUpScreen extends StatelessWidget {
                     CircleAvatar(
                       radius: 40,
                       backgroundImage: AssetImage('assets/person.jpg'),
+                      backgroundColor: Colors.white,
                     ),
                     SizedBox(height: 20),
                   ],

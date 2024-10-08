@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/views/signup.dart';
 
-void main() {
-  runApp(const signinempty());
-}
-
 class signinempty extends StatelessWidget {
   const signinempty({super.key});
 

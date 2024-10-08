@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const signinfilled());
-}
 
 class signinfilled extends StatelessWidget {
   const signinfilled({Key? key}) : super(key: key);
