@@ -48,7 +48,7 @@ class SignInScreen extends StatelessWidget {
               ),
               const SizedBox(height: 48),
               const Text(
-                'Email Adress',
+                'Email Adress walaweeee',
                 style: TextStyle(
                   color: Colors.grey,
                 ),
@@ -85,7 +85,7 @@ class SignInScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               Align(
-                alignment: Alignment.centerRight,
+                alignment: Alignment.center,
                 child: Container(
                   alignment: Alignment.center,
                   decoration: const BoxDecoration(
@@ -94,6 +94,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                   child: const Padding(
                     padding: EdgeInsets.all(12.0),
+
                     child: Icon(
                       Icons.arrow_forward,
                       color: Colors.white,

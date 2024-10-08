@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shoes/views/Home.dart';
-import 'package:shoes/views/forgotpass.dart';
-import 'package:shoes/views/signup.dart';
+import 'package:shoes/views/signinempty.dart';
 
-class signinempty extends StatelessWidget {
-  const signinempty({super.key});
+class forgotpassfound extends StatelessWidget {
+  const forgotpassfound({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +69,7 @@ class SignInScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               const Text(
-                'Password',
+                'Enter New Password',
                 style: TextStyle(
                   color: Colors.grey,
                 ),
@@ -94,9 +92,9 @@ class SignInScreen extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Home()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const signinempty()));
                     // Tambahkan navigasi atau aksi di sini
                   },
                   child: Container(
@@ -116,48 +114,6 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Start fresh now? ',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const signup()));
-                    },
-                    child: const Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        color: Color(0xFF1F41BB),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Center(
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const forgotpass()));
-                    // Tambahkan aksi untuk tombol Forgot Password di sini
-                  },
-                  child: const Text(
-                    'Forgot password?',
-                    style: TextStyle(
-                      color: Color(0xFF1F41BB),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
             ],
           ),
         ),

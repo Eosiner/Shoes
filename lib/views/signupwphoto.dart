@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/views/confirmationsignup.dart';
+import 'package:shoes/views/signup.dart';
 
 class signupwphoto extends StatelessWidget {
   const signupwphoto({super.key});
@@ -23,7 +24,12 @@ class SignUpScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const signup()));
+          },
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -42,14 +48,14 @@ class SignUpScreen extends StatelessWidget {
                       'Create New',
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+
                       ),
                     ),
                     Text(
                       'Your Account',
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+
                       ),
                     ),
                     SizedBox(height: 20),

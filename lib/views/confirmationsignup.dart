@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/views/signinempty.dart';
+import 'package:shoes/views/signupwphoto.dart';
 
 
 class confirmationsignup extends StatelessWidget {
@@ -13,6 +14,10 @@ class confirmationsignup extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const signupwphoto()));
             // Aksi kembali ke layar sebelumnya
           },
         ),
@@ -30,7 +35,6 @@ class confirmationsignup extends StatelessWidget {
                 'Confirm',
                 style: TextStyle(
                   fontSize: 24,
-                  fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
@@ -40,7 +44,6 @@ class confirmationsignup extends StatelessWidget {
                 'New Account',
                 style: TextStyle(
                   fontSize: 24,
-                  fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),

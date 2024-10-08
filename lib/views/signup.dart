@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/views/signupwphoto.dart';
+import 'package:shoes/views/signinempty.dart';
 
 class signup extends StatelessWidget {
   const signup({super.key});
@@ -21,9 +22,22 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {},
+        leading: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.only(right: 4),
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const signinempty()));
+                  },
+              ),
+            ),
+
+          ],
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -38,18 +52,18 @@ class SignUpScreen extends StatelessWidget {
               const Center(
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       'Create New',
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+
                       ),
                     ),
-                    Text(
-                      'Your Account',
+                    const Text(
+                      ' Your Account',
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+
                       ),
                     ),
                     SizedBox(height: 20),
@@ -164,7 +178,8 @@ class SignUpScreen extends StatelessWidget {
               // Submit Button
               Center(
                 child: ElevatedButton(
-                  onPressed: () { Navigator.push(
+                  onPressed: () {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const signupwphoto()));
