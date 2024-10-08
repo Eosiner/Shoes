@@ -1,124 +1,187 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/views/signupwphoto.dart';
 
 void main() {
   runApp(const signup());
 }
 
 class signup extends StatelessWidget {
-  const signup({Key? key}) : super(key: key);
+  const signup({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'Create New',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Text(
-                  'Your Account',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Container(
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.grey),
-                  ),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      const Icon(Icons.person_outline, size: 40),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF1F41BB),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.add,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 30),
-                _buildTextField('Full Name'),
-                const SizedBox(height: 20),
-                _buildTextField('Email Address'),
-                const SizedBox(height: 20),
-                _buildTextField('Password', isPassword: true),
-                const SizedBox(height: 20),
-                _buildTextField('Confirm Password', isPassword: true),
-                const SizedBox(height: 30),
-                // Ganti ElevatedButton dengan Container
-                Container(
-                  width: 60, // Lebar tombol
-                  height: 60, // Tinggi tombol
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: const Color(0xFF1F41BB),
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      // Tambahkan logika untuk berpindah halaman di sini
-                    },
-                    child: const Icon(
-                      Icons.arrow_forward,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SignUpScreen(),
     );
   }
+}
 
-  Widget _buildTextField(String label, {bool isPassword = false}) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
-        borderRadius: BorderRadius.circular(8),
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {},
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
-      child: TextField(
-        obscureText: isPassword,
-        decoration: InputDecoration(
-          labelText: label,
-          border: InputBorder.none,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Centering the title and photo
+              const Center(
+                child: Column(
+                  children: [
+                    Text(
+                      'Create New',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Your Account',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    CircleAvatar(
+                      radius: 40,
+                      backgroundImage: AssetImage('assets/person.jpg'),
+                    ),
+                    SizedBox(height: 20),
+                  ],
+                ),
+              ),
+
+              // Full Name Field with Label
+              const Text(
+                'Full Name',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  contentPadding:
+                  EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                ),
+              ),
+              const SizedBox(height: 15),
+
+              // Email Address Field with Label
+              const Text(
+                'Email Address',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  contentPadding:
+                  EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                ),
+              ),
+              const SizedBox(height: 15),
+
+              // Password Field with Label
+              const Text(
+                'Password',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+              ),
+              TextFormField(
+                obscureText: true,
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  contentPadding:
+                  EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                ),
+              ),
+              const SizedBox(height: 15),
+
+              // Confirm Password Field with Label
+              const Text(
+                'Confirm Password',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+              ),
+              TextFormField(
+                obscureText: true,
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  contentPadding:
+                  EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                ),
+              ),
+              const SizedBox(height: 30),
+
+              // Submit Button
+              Center(
+                child: ElevatedButton(
+                  onPressed: () { Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const signupwphoto()));
+                  },
+                  child: const Icon(Icons.arrow_forward, color: Colors.white),
+                  style: ElevatedButton.styleFrom(
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(15),
+                    backgroundColor: const Color(0xFF1F41BB),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

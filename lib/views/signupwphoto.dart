@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/views/confirmationsignup.dart';
 
 void main() {
-  runApp(const signup());
+  runApp(const signupwphoto());
 }
 
-class signup extends StatelessWidget {
-  const signup({super.key});
+class signupwphoto extends StatelessWidget {
+  const signupwphoto({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
@@ -165,7 +167,11 @@ class SignUpScreen extends StatelessWidget {
               // Submit Button
               Center(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () { Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const confirmationsignup()));
+                    },
                   child: const Icon(Icons.arrow_forward, color: Colors.white),
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),

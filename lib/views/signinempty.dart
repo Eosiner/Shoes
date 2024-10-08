@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/views/signup.dart';
 
 void main() {
   runApp(const signinempty());
@@ -25,6 +26,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -121,7 +123,10 @@ class SignInScreen extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      // Tambahkan aksi untuk tombol Sign Up di sini
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const signup()));
                     },
                     child: const Text(
                       'Sign Up',

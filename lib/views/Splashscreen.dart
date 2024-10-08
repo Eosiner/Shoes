@@ -28,6 +28,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white, // Ubah warna background menjadi putih (#FFFFFF)
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -86,10 +87,12 @@ class LoginScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.grey),
                   ),
                   TextButton(
-                    onPressed: () {Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const signup()));},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const signup()));
+                    },
                     child: const Text(
                       'Sign In',
                       style: TextStyle(

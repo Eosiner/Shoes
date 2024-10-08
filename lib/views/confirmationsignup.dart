@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/views/signinempty.dart';
 
-class ConfirmAccountScreen extends StatelessWidget {
-  const ConfirmAccountScreen({super.key});
+
+class confirmationsignup extends StatelessWidget {
+  const confirmationsignup({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
@@ -76,7 +79,12 @@ class ConfirmAccountScreen extends StatelessWidget {
               width: double.infinity,
               margin: const EdgeInsets.only(bottom: 10), // Menaikkan tombol sedikit
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const signinempty()));
+                },
                 child: const Text(
                   'Create My Account',
                   style: TextStyle(
@@ -103,7 +111,7 @@ class ConfirmAccountScreen extends StatelessWidget {
 
 void main() {
   runApp(const MaterialApp(
-    home: ConfirmAccountScreen(),
+    home: confirmationsignup(),
     debugShowCheckedModeBanner: false,
   ));
 }
