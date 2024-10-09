@@ -78,16 +78,19 @@ class SignUpScreen extends StatelessWidget {
               ),
 
               // Full Name Field with Label
-              const Text(
-                'Full Name',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
-              ),
+              // const Text(
+              //   'Full Name',
+              //   style: TextStyle(
+              //     fontSize: 16,
+              //     color: Colors.grey,
+              //   ),
+              // ),
               TextFormField(
                 decoration: const InputDecoration(
                   filled: true,
+                  labelText: 'Full Name',
+                  labelStyle: TextStyle(color: Colors.grey),
+                  floatingLabelStyle: TextStyle(color: Colors.black),
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
@@ -102,16 +105,19 @@ class SignUpScreen extends StatelessWidget {
               const SizedBox(height: 15),
 
               // Email Address Field with Label
-              const Text(
-                'Email Address',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
-              ),
+              // const Text(
+              //   'Email Address',
+              //   style: TextStyle(
+              //     fontSize: 16,
+              //     color: Colors.grey,
+              //   ),
+              // ),
               TextFormField(
                 decoration: const InputDecoration(
                   filled: true,
+                  labelText: 'Email Address',
+                  labelStyle: TextStyle(color: Colors.grey),
+                  floatingLabelStyle: TextStyle(color: Colors.black),
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
@@ -126,17 +132,20 @@ class SignUpScreen extends StatelessWidget {
               const SizedBox(height: 15),
 
               // Password Field with Label
-              const Text(
-                'Password',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
-              ),
+              // const Text(
+              //   'Password',
+              //   style: TextStyle(
+              //     fontSize: 16,
+              //     color: Colors.grey,
+              //   ),
+              // ),
               TextFormField(
                 obscureText: true,
                 decoration: const InputDecoration(
                   filled: true,
+                  labelText: 'Password',
+                  labelStyle: TextStyle(color: Colors.grey),
+                  floatingLabelStyle: TextStyle(color: Colors.black),
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
@@ -151,17 +160,20 @@ class SignUpScreen extends StatelessWidget {
               const SizedBox(height: 15),
 
               // Confirm Password Field with Label
-              const Text(
-                'Confirm Password',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
-              ),
+              // const Text(
+              //   'Confirm Password',
+              //   style: TextStyle(
+              //     fontSize: 16,
+              //     color: Colors.grey,
+              //   ),
+              // ),
               TextFormField(
                 obscureText: true,
                 decoration: const InputDecoration(
                   filled: true,
+                  labelText: 'Confirm Password',
+                  labelStyle: TextStyle(color: Colors.grey),
+                  floatingLabelStyle: TextStyle(color: Colors.black),
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),

@@ -56,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const signinempty()));
+                          builder: (context) => const signup()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF1F41BB),
@@ -86,7 +86,7 @@ class LoginScreen extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const signup()));
+                              builder: (context) => const signinempty()));
                     },
                     child: const Text(
                       'Sign In',

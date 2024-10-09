@@ -52,15 +52,18 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 48),
-              const Text(
-                'Email Address',
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
+              // const Text(
+              //   'Email Address',
+              //   style: TextStyle(
+              //     color: Colors.grey,
+              //   ),
+              // ),
               const SizedBox(height: 8),
               TextField(
                 decoration: InputDecoration(
+                  labelText: 'Email Address',
+                  labelStyle: TextStyle(color: Colors.grey),
+                  floatingLabelStyle: TextStyle(color: Colors.black),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(width: 1, color: Colors.black),
@@ -69,17 +72,20 @@ class SignInScreen extends StatelessWidget {
                   fillColor: Colors.white,
                 ),
               ),
-              const SizedBox(height: 16),
-              const Text(
-                'Password',
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
+              // const SizedBox(height: 16),
+              // const Text(
+              //   'Password',
+              //   style: TextStyle(
+              //     color: Colors.grey,
+              //   ),
+              // ),
               const SizedBox(height: 8),
               TextField(
                 obscureText: true,
                 decoration: InputDecoration(
+                  labelText: 'Password',
+                  labelStyle: TextStyle(color: Colors.grey),
+                  floatingLabelStyle: TextStyle(color: Colors.black),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(width: 1, color: Colors.black),
