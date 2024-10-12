@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/views/keranjang_fill.dart';
+import 'package:shoes/views/profile.dart';
 import 'package:shoes/views/scanqr.dart';
 import 'detail_barang.dart';
 import 'package:shoes/views/pesan.dart';
@@ -18,13 +19,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
-  // Daftar halaman untuk setiap item di BottomNavigationBar
   final List<Widget> _pages = [
-    ShoeStoreHome(),  // Halaman utama toko sepatu
-    pesan(), // Halaman placeholder (ganti sesuai kebutuhan)
-    const scanqr(),      // Pastikan menggunakan nama kelas dengan huruf kapital
-    const keranjang_fill(), // Pastikan menggunakan nama kelas dengan huruf kapital
-    const Placeholder(),
+    ShoeStoreHome(),
+    pesan(),
+    const scanqr(),
+    const keranjang_fill(),
+    const Profile(),
   ];
 
   // Fungsi untuk menangani pergantian halaman
