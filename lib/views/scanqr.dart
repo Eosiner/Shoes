@@ -17,19 +17,7 @@ class scanqr extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    // Logo di pojok kiri
-                    Image.asset('assets/shoeslogo.jpg', height: 40),
-                    const SizedBox(width: 8),
-                    // Spacer untuk memberi ruang antara logo dan teks
-                    const Expanded(
-                      child: Center(
-                        child: Text(
-                          'QR',
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    // Tombol kembali di pojok kanan
+                    // Tombol kembali di pojok kiri
                     IconButton(
                       icon: const Icon(Icons.arrow_back),
                       onPressed: () {
@@ -39,12 +27,24 @@ class scanqr extends StatelessWidget {
                         ); // Navigasi kembali ke halaman sebelumnya
                       },
                     ),
+                    // Spacer untuk memberi ruang antara logo dan teks
+                    const Expanded(
+                      child: Center(
+                        child: Text(
+                          'QR',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    // Logo di pojok kanan
+                    Image.asset('assets/shoeslogo.jpg', height: 40),
+                    const SizedBox(width: 8),
                   ],
                 ),
               ],
             ),
           ),
-
           Expanded(
             child: Center(
               child: Column(
@@ -73,7 +73,8 @@ class scanqr extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Inbox()), // Navigate to Inbox
+                      MaterialPageRoute(
+                          builder: (context) => Inbox()), // Navigate to Inbox
                     );
                   },
                   child: Image.asset('assets/inbox.jpg', width: 24, height: 24),
@@ -83,7 +84,8 @@ class scanqr extends StatelessWidget {
                     print("Gallery icon tapped");
                     // Add logic for gallery feature
                   },
-                  child: Image.asset('assets/galery.jpg', width: 24, height: 24),
+                  child:
+                      Image.asset('assets/galery.jpg', width: 24, height: 24),
                 ),
               ],
             ),

@@ -14,17 +14,17 @@ class pesan extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: Image.asset('assets/shoeslogo.jpg'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black), // Ubah ikon menjadi panah maju
+          onPressed: () {
+            // Handle forward button press
+          },
+        ),
         title: const Center(
           child: Text('Pesan', style: TextStyle(color: Colors.black)),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () {
-              // Handle back button press
-            },
-          ),
+          Image.asset('assets/shoeslogo.jpg'), // Pindahkan logo sepatu ke actions
         ],
       ),
       body: Column(
