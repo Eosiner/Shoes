@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/views/Splashscreen.dart';
 import 'package:shoes/views/alamat.dart';
+import 'package:shoes/views/editprofil.dart';
 import 'package:shoes/views/keranjang_fill.dart';
 
 class Profile extends StatelessWidget {
@@ -50,7 +52,9 @@ class Profile extends StatelessWidget {
               const Spacer(), // Spacer untuk memberi jarak antara teks dan tombol logout
               IconButton(
                 onPressed: () {
-                  // Aksi logout
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Splashscreen()));
                 },
                 icon: Image.asset(
                   'assets/logout.jpg', // Gambar logout.jpg
@@ -79,7 +83,9 @@ class Profile extends StatelessWidget {
             title: const Text('Edit Profil'),
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
             onTap: () {
-              // Aksi Edit Profil
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => editprofil()));
             },
           ),
           ListTile(

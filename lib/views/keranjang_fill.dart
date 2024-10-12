@@ -12,7 +12,7 @@ class keranjang_fill extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // Kembali ke halaman sebelumnya
+            Navigator.pop(context); // Navigate back to the previous screen
           },
         ),
       ),
@@ -56,13 +56,13 @@ class keranjang_fill extends StatelessWidget {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
-                backgroundColor: const Color(0xFF275A65), // Warna latar belakang tombol
-                foregroundColor: Colors.white, // Warna teks menjadi putih
+                backgroundColor: const Color(0xFF275A65),
+                foregroundColor: Colors.white,
               ),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const detailcheckout()), // Pastikan nama kelas sesuai
+                  MaterialPageRoute(builder: (context) => const detailcheckout()),
                 );
               },
               child: const Text(
@@ -109,8 +109,8 @@ class _CartItemWidgetState extends State<CartItemWidget> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
-        padding: const EdgeInsets.all(10), // Mengurangi padding dalam kotak
-        height: 139, // Menentukan tinggi kotak agar lebih rendah
+        padding: const EdgeInsets.all(10),
+        height: 139,
         decoration: BoxDecoration(
           color: Colors.grey[300],
           borderRadius: BorderRadius.circular(10),
@@ -120,8 +120,8 @@ class _CartItemWidgetState extends State<CartItemWidget> {
             // Product Image
             Image.asset(
               widget.productImage,
-              width: 60, // Mengurangi lebar gambar
-              height: 60, // Mengurangi tinggi gambar
+              width: 60,
+              height: 60,
               fit: BoxFit.cover,
             ),
             const SizedBox(width: 10),
@@ -145,7 +145,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
 
             // Quantity Controls
             Column(
-              mainAxisAlignment: MainAxisAlignment.center, // Center align buttons
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
                   icon: const Icon(Icons.add),
@@ -174,7 +174,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
             IconButton(
               icon: const Icon(Icons.delete, color: Colors.red),
               onPressed: () {
-                // Tambahkan logika untuk menghapus item di sini
+                // Add logic to remove the item here
               },
             ),
           ],

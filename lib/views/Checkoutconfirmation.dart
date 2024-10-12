@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/views/Home.dart';
+import 'package:shoes/views/keranjang_fill.dart';
 
 class Checkoutconfirmation extends StatelessWidget {
   @override
@@ -36,21 +38,30 @@ class Checkoutconfirmation extends StatelessWidget {
             const SizedBox(height: 48),
             ElevatedButton(
               onPressed: () {
-                // Handle order more shoes action
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Home()));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF275A65),
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15), // Reduced padding
               ),
-              child: const Text('Order Sepatu Lainnya'),
+              child: const Text(
+                'Order Sepatu Lainnya',
+                style: TextStyle(color: Colors.white), // Ubah warna teks menjadi putih
+              ),
             ),
             const SizedBox(height: 16),
             TextButton(
               onPressed: () {
-                // Handle view orders action
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => keranjang_fill()));
               },
               style: TextButton.styleFrom(
-                foregroundColor: Colors.grey[600],
+                backgroundColor: Colors.grey, // Ubah warna tombol menjadi abu-abu
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15), // Reduced padding
               ),
               child: const Text('Lihat Orderan Saya'),
             ),
