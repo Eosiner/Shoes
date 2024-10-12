@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/views/alamat.dart';
+import 'package:shoes/views/keranjang_fill.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -98,14 +100,18 @@ class Profile extends StatelessWidget {
             title: const Text('Orderan Kamu'),
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
             onTap: () {
-              // Aksi Orderan Kamu
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => keranjang_fill()));
             },
           ),
           ListTile(
             title: const Text('Alamat'),
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
             onTap: () {
-              // Aksi Alamat
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => alamat()));
             },
           ),
           ListTile(
