@@ -15,7 +15,9 @@ class pesan extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: Image.asset('assets/shoeslogo.jpg'),
-        title: const Text('Pesan', style: TextStyle(color: Colors.black)),
+        title: const Center(
+          child: Text('Pesan', style: TextStyle(color: Colors.black)),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.black),
@@ -36,7 +38,7 @@ class pesan extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0), // Kurangi padding
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border(
@@ -46,21 +48,28 @@ class pesan extends StatelessWidget {
             child: Row(
               children: [
                 IconButton(
-                  icon: Image.asset('assets/plus.jpg'),
+                  icon: Image.asset('assets/plus.jpg', width: 24, height: 24), // Sesuaikan ukuran
                   onPressed: () {
                     // Handle plus button press
                   },
                 ),
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Type a message',
-                      border: InputBorder.none,
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200], // Warna latar belakang
+                      borderRadius: BorderRadius.circular(40), // Radius tabung
+                    ),
+                    child: const TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Type a message',
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10), // Padding teks
+                      ),
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: Image.asset('assets/send.jpg'),
+                  icon: Image.asset('assets/send.jpg', width: 24, height: 24), // Sesuaikan ukuran
                   onPressed: () {
                     // Handle send button press
                   },

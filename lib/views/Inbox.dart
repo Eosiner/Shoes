@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'scanqr.dart'; // Import halaman ScanQR
-import 'keranjang_fill.dart'; // Import halaman Keranjang
-import 'detail_barang.dart'; // Import halaman DetailBarang
-import 'home.dart'; // Import halaman Home
 
 class Inbox extends StatefulWidget {
   @override

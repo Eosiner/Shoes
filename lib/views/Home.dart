@@ -191,7 +191,7 @@ class ShoeStoreHome extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => DetailBarang()),
+                          MaterialPageRoute(builder: (context) => Detail_barang()),
                         );
                       },
                       child: Container(

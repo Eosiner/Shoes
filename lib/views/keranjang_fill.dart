@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes/views/detailcheckout.dart';
 
 class keranjang_fill extends StatelessWidget {
   const keranjang_fill({super.key});
@@ -7,9 +8,9 @@ class keranjang_fill extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Keranjang Anda'),
+        title: const Text('Keranjang Anda'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context); // Kembali ke halaman sebelumnya
           },
@@ -54,13 +55,17 @@ class keranjang_fill extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50),
-                backgroundColor: Colors.teal,
+                minimumSize: const Size(double.infinity, 50),
+                backgroundColor: const Color(0xFF275A65), // Warna latar belakang tombol
+                foregroundColor: Colors.white, // Warna teks menjadi putih
               ),
               onPressed: () {
-                // Tambahkan logika untuk checkout di sini
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const detailcheckout()), // Pastikan nama kelas sesuai
+                );
               },
-              child: Text(
+              child: const Text(
                 'Lanjut Checkout',
                 style: TextStyle(fontSize: 16),
               ),
@@ -79,12 +84,12 @@ class CartItemWidget extends StatefulWidget {
   final int quantity;
 
   const CartItemWidget({
-    Key? key,
+    super.key,
     required this.productName,
     required this.productPrice,
     required this.productImage,
     required this.quantity,
-  }) : super(key: key);
+  });
 
   @override
   _CartItemWidgetState createState() => _CartItemWidgetState();
@@ -104,7 +109,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
-        padding: EdgeInsets.all(10), // Mengurangi padding dalam kotak
+        padding: const EdgeInsets.all(10), // Mengurangi padding dalam kotak
         height: 139, // Menentukan tinggi kotak agar lebih rendah
         decoration: BoxDecoration(
           color: Colors.grey[300],
@@ -119,7 +124,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
               height: 60, // Mengurangi tinggi gambar
               fit: BoxFit.cover,
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
 
             // Product Info
             Expanded(
@@ -128,11 +133,11 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                 children: [
                   Text(
                     widget.productName,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     'Rp ${widget.productPrice}',
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ],
               ),
@@ -143,7 +148,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
               mainAxisAlignment: MainAxisAlignment.center, // Center align buttons
               children: [
                 IconButton(
-                  icon: Icon(Icons.add),
+                  icon: const Icon(Icons.add),
                   onPressed: () {
                     setState(() {
                       quantity++;
@@ -152,10 +157,10 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                 ),
                 Text(
                   quantity.toString(),
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
                 IconButton(
-                  icon: Icon(Icons.remove),
+                  icon: const Icon(Icons.remove),
                   onPressed: () {
                     setState(() {
                       if (quantity > 1) quantity--;
@@ -167,7 +172,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
 
             // Remove Button
             IconButton(
-              icon: Icon(Icons.delete, color: Colors.red),
+              icon: const Icon(Icons.delete, color: Colors.red),
               onPressed: () {
                 // Tambahkan logika untuk menghapus item di sini
               },

@@ -13,12 +13,12 @@ void main()
    @override
    Widget build(BuildContext context) {
      return MaterialApp(
-       home: DetailBarang(),
+       home: Detail_barang(),
      );
 
    } }
 
-class DetailBarang extends StatelessWidget {
+class Detail_barang extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
