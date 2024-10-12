@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/views/Checkoutconfirmation.dart';
 import 'package:shoes/views/alamat.dart';
+import 'package:shoes/views/Voucher.dart';
 
 class detailcheckout extends StatelessWidget {
   const detailcheckout({super.key});
@@ -163,7 +164,9 @@ class detailcheckout extends StatelessWidget {
         title: const Text('Ada Voucher buat kamu nih!'),
         trailing: const Icon(Icons.chevron_right),
         onTap: () {
-          // Contoh: Buka halaman pilihan voucher
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Voucher()));
         },
       ),
     );

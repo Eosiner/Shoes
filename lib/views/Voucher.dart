@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-class VoucherPage extends StatelessWidget {
+class Voucher extends StatelessWidget {
+  const Voucher({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Voucher Saya', style: TextStyle(fontSize: 20)),
+        title: const Text('Voucher Saya', style: TextStyle(fontSize: 20)),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             // Aksi kembali ke halaman sebelumnya
             Navigator.pop(context);
@@ -18,8 +20,8 @@ class VoucherPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
             child: Text(
               'Masukkan Kode Voucher',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -27,7 +29,7 @@ class VoucherPage extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               children: [
                 voucherItem('Gratis Ongkir', 'Min. Rp 100', 'Berlaku hingga 31 Des 2024'),
                 voucherItem('Diskon 5% s/d Rp40RB', 'Min. Rp 50.000', 'Berlaku hingga 31 Des 2024'),
@@ -43,13 +45,13 @@ class VoucherPage extends StatelessWidget {
               onPressed: () {
                 // Aksi tombol forward
               },
-              child: Icon(Icons.arrow_forward),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xff1F41BB),
-                shape: CircleBorder(),
-                padding: EdgeInsets.all(24),
+                backgroundColor: const Color(0xff1F41BB),
+                shape: const CircleBorder(),
+                padding: const EdgeInsets.all(24),
                 iconColor: Colors.white
               ),
+              child: const Icon(Icons.arrow_forward),
             ),
           ),
         ],
@@ -60,16 +62,16 @@ class VoucherPage extends StatelessWidget {
   Widget voucherItem(String title, String minSpend, String validity) {
     return Card(
       shape: Border.all(),
-      color: Color(0xff3B7D8B),
-      margin: EdgeInsets.symmetric(vertical: 8.0),
+      color: const Color(0xff3B7D8B),
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
-        title: Text(title, style: TextStyle(fontSize: 18)),
-        subtitle: Text('$minSpend\n$validity', style: TextStyle(color: Colors.black)),
+        title: Text(title, style: const TextStyle(fontSize: 18)),
+        subtitle: Text('$minSpend\n$validity', style: const TextStyle(color: Colors.black)),
         trailing: ElevatedButton(
           onPressed: () {
             // Aksi tombol 'Gunakan'
           },
-          child: Text('Gunakan'),
+          child: const Text('Gunakan'),
         ),
       ),
     );
