@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-class ShoppingCartPage extends StatelessWidget {
+class keranjang_fill extends StatelessWidget {
+  const keranjang_fill({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

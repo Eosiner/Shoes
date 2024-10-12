@@ -18,26 +18,26 @@ class SuccessDialog extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
               child: IconButton(
-                icon: Icon(Icons.close, color: Colors.white),
+                icon: const Icon(Icons.close, color: Colors.white),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
             ),
 
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // Checkmark icon
-            Icon(
+            const Icon(
               Icons.check,
               size: 50,
               color: Colors.lightBlueAccent,
             ),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Success message text
-            Text(
+            const Text(
               "Barang berhasil ditambahkan ke dalam keranjang",
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -46,7 +46,7 @@ class SuccessDialog extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Button to view cart
             ElevatedButton(
@@ -54,7 +54,7 @@ class SuccessDialog extends StatelessWidget {
                 Navigator.of(context).pop();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ShoppingCartPage()), // Ganti dengan nama halaman Anda
+                  MaterialPageRoute(builder: (context) => keranjang_fill()), // Ganti dengan nama halaman Anda
                 );
                 
               },
@@ -63,9 +63,9 @@ class SuccessDialog extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
               ),
-              child: Text(
+              child: const Text(
                 "Lihat Keranjang",
                 style: TextStyle(fontSize: 16),
               ),

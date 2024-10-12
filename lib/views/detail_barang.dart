@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/components/popup_add_chart.dart';
 
-// void main() {
-//   runApp(MyApp());
-// }
+import 'Home.dart';
 
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: ProductDetailPage(),
-//     );
-//   }
-// }
 
-class ProductDetailPage extends StatelessWidget {
+void main()
+{
+   runApp(MyApp());
+}
+
+ class MyApp extends StatelessWidget {
+   @override
+   Widget build(BuildContext context) {
+     return MaterialApp(
+       home: DetailBarang(),
+     );
+
+   } }
+
+class DetailBarang extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,7 +27,9 @@ class ProductDetailPage extends StatelessWidget {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.pop(context); // Fungsionalitas kembali
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Home()));
             },
           ),
           backgroundColor: Colors.transparent,
