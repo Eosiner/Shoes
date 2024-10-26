@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shoes/views/Home.dart';
 import 'package:shoes/views/forgotpass.dart';
 import 'package:shoes/views/signup.dart';
@@ -18,8 +20,56 @@ class signinempty extends StatelessWidget {
   }
 }
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
+
+  @override
+  _SignInScreenState createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // Fungsi untuk login
+  Future<void> _login() async {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Email dan password harus diisi")),
+      );
+      return;
+    }
+
+    try {
+      // Login dengan email dan password
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+
+      // Cek apakah user berhasil login
+      if (userCredential.user != null) {
+
+        // Menyimpan status login jika berhasil login
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('isLoggedIn', true);
+        await prefs.setString('userID', userCredential.user?.uid ?? '');
+
+        // Navigasi ke halaman Home jika login berhasil
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const Home()),
+        );
+      }
+    } catch (e) {
+      // Tampilkan pesan error jika gagal login
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error: ${e.toString()}")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +83,7 @@ class SignInScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 48),
               Align(
-                alignment: Alignment.centerRight, // Mengatur gambar ke kanan
+                alignment: Alignment.centerRight,
                 child: Image.asset(
                   'assets/shoeslogo.jpg',
                   height: 80,
@@ -41,10 +91,10 @@ class SignInScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               const Align(
-                alignment: Alignment.centerRight, // Mengatur teks ke kanan
+                alignment: Alignment.centerRight,
                 child: Text(
                   'Welcome Back,\nExplorer!',
-                  textAlign: TextAlign.right, // Teks diratakan ke kanan
+                  textAlign: TextAlign.right,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -52,18 +102,12 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 48),
-              // const Text(
-              //   'Email Address',
-              //   style: TextStyle(
-              //     color: Colors.grey,
-              //   ),
-              // ),
-              const SizedBox(height: 8),
               TextField(
+                controller: _emailController,
                 decoration: InputDecoration(
                   labelText: 'Email Address',
-                  labelStyle: TextStyle(color: Colors.grey),
-                  floatingLabelStyle: TextStyle(color: Colors.black),
+                  labelStyle: const TextStyle(color: Colors.grey),
+                  floatingLabelStyle: const TextStyle(color: Colors.black),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(width: 1, color: Colors.black),
@@ -72,20 +116,14 @@ class SignInScreen extends StatelessWidget {
                   fillColor: Colors.white,
                 ),
               ),
-              // const SizedBox(height: 16),
-              // const Text(
-              //   'Password',
-              //   style: TextStyle(
-              //     color: Colors.grey,
-              //   ),
-              // ),
               const SizedBox(height: 8),
               TextField(
+                controller: _passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  labelStyle: TextStyle(color: Colors.grey),
-                  floatingLabelStyle: TextStyle(color: Colors.black),
+                  labelStyle: const TextStyle(color: Colors.grey),
+                  floatingLabelStyle: const TextStyle(color: Colors.black),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(width: 1, color: Colors.black),
@@ -98,13 +136,7 @@ class SignInScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Home()));
-                    // Tambahkan navigasi atau aksi di sini
-                  },
+                  onTap: _login, // Login akan dilakukan saat tombol ditekan
                   child: Container(
                     alignment: Alignment.center,
                     decoration: const BoxDecoration(
@@ -133,8 +165,8 @@ class SignInScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => const signup()));
+                        MaterialPageRoute(builder: (context) => const Signup()),
+                      );
                     },
                     child: const Text(
                       'Sign Up',
@@ -152,8 +184,8 @@ class SignInScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const forgotpass()));
-                    // Tambahkan aksi untuk tombol Forgot Password di sini
+                          builder: (context) => const forgotpass()),
+                    );
                   },
                   child: const Text(
                     'Forgot password?',

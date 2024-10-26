@@ -28,7 +28,7 @@ class SignUpScreen extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const signup()));
+                    builder: (context) => const Signup()));
           },
         ),
         backgroundColor: Colors.transparent,

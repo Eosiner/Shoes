@@ -4,19 +4,19 @@ import 'package:shoes/components/popup_add_chart.dart';
 import 'Home.dart';
 
 
-void main()
-{
-   runApp(MyApp());
-}
+// void main()
+// {
+//    runApp(MyApp());
+// }
 
- class MyApp extends StatelessWidget {
-   @override
-   Widget build(BuildContext context) {
-     return MaterialApp(
-       home: Detail_barang(),
-     );
+//  class MyApp extends StatelessWidget {
+//    @override
+//    Widget build(BuildContext context) {
+//      return MaterialApp(
+//        home: Detail_barang(),
+//      );
 
-   } }
+//    } }
 
 class Detail_barang extends StatelessWidget {
   @override

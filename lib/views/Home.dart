@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shoes/views/keranjang_fill.dart';
 import 'package:shoes/views/profile.dart';
 import 'package:shoes/views/scanqr.dart';
 import 'detail_barang.dart';
 import 'package:shoes/views/pesan.dart';
 
-void main() {
-  runApp(const Home());
-}
+// void main() {
+//   runApp(const Home());
+// }
 
 class Home extends StatefulWidget {
   const Home({super.key});
+
+  Future<String?> getUSerID() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('userID'); // Mengambil userID dari SharedPreferences
+  }
 
   @override
   _HomeState createState() => _HomeState();
@@ -18,14 +24,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
-
-  final List<Widget> _pages = [
-    ShoeStoreHome(),
-    pesan(),
-    const scanqr(),
-    const keranjang_fill(),
-    const Profile(),
-  ];
 
   // Fungsi untuk menangani pergantian halaman
   void _onItemTapped(int index) {
@@ -36,42 +34,76 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: IndexedStack(
-          index: _selectedIndex,
-          children: _pages,
-        ),
-        // Hanya tampilkan BottomNavigationBar jika halaman bukan ScanQR
-        bottomNavigationBar: _selectedIndex != 2 // Misal indeks halaman ScanQR adalah 2
-            ? BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _selectedIndex, // Menunjukkan item yang aktif
-          onTap: _onItemTapped, // Menangani perubahan halaman
-          items: const [
-            BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/home.jpg')), label: ''),
-            BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/pesan.jpg')), label: ''),
-            BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/qrcode.jpg')), label: ''),
-            BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/keranjang.jpg')), label: ''),
-            BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/person.jpg')), label: ''),
-          ],
-        )
-            : null, // Tidak menampilkan BottomNavigationBar jika halaman ScanQR aktif
-      ),
+    return FutureBuilder<String?>(
+      future: widget.getUSerID(), // Ambil userID dari SharedPreferences
+      builder: (context, snapshot) {
+        // Jika masih menunggu data
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        // Jika ada error atau userID tidak ditemukan
+        if (!snapshot.hasData || snapshot.hasError) {
+          return const Center(child: Text("User ID not found"));
+        }
+
+        String? userID = snapshot.data; // Ambil userID dari snapshot
+
+        // Buat halaman berdasarkan userID yang telah diambil
+        final List<Widget> _pages = [
+          ShoeStoreHome(),
+          pesan(),
+          const scanqr(),
+          const keranjang_fill(),
+          Profile(userID: userID ?? ''), // Berikan userID ke halaman Profile
+        ];
+
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            backgroundColor: Colors.white,
+            body: IndexedStack(
+              index: _selectedIndex,
+              children: _pages, // Gunakan halaman dengan userID yang valid
+            ),
+            bottomNavigationBar: _selectedIndex != 2 // Jika bukan ScanQR
+                ? BottomNavigationBar(
+                    type: BottomNavigationBarType.fixed,
+                    currentIndex: _selectedIndex, // Menunjukkan item aktif
+                    onTap: _onItemTapped, // Menangani pergantian halaman
+                    items: const [
+                      BottomNavigationBarItem(
+                          icon: ImageIcon(AssetImage('assets/home.jpg')),
+                          label: ''),
+                      BottomNavigationBarItem(
+                          icon: ImageIcon(AssetImage('assets/pesan.jpg')),
+                          label: ''),
+                      BottomNavigationBarItem(
+                          icon: ImageIcon(AssetImage('assets/qrcode.jpg')),
+                          label: ''),
+                      BottomNavigationBarItem(
+                          icon: ImageIcon(AssetImage('assets/keranjang.jpg')),
+                          label: ''),
+                      BottomNavigationBarItem(
+                          icon: ImageIcon(AssetImage('assets/person.jpg')),
+                          label: ''),
+                    ],
+                  )
+                : null, // Tidak menampilkan BottomNavigationBar jika ScanQR aktif
+          ),
+        );
+      },
     );
   }
 }
 
 class ShoeStoreHome extends StatelessWidget {
   final List<String> categories = [
-    'All Shoes', 'Running', 'Training', 'Basketball', 'Hiking'
+    'All Shoes',
+    'Running',
+    'Training',
+    'Basketball',
+    'Hiking'
   ];
 
   final List<Map<String, String>> forUcupProducts = [
@@ -153,7 +185,8 @@ class ShoeStoreHome extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Chip(
-                      backgroundColor: index == 0 ? Colors.blue : Colors.grey[200],
+                      backgroundColor:
+                          index == 0 ? Colors.blue : Colors.grey[200],
                       label: Text(
                         categories[index],
                         style: TextStyle(
@@ -187,11 +220,13 @@ class ShoeStoreHome extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector( // Use GestureDetector to capture tap events
+                    child: GestureDetector(
+                      // Use GestureDetector to capture tap events
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Detail_barang()),
+                          MaterialPageRoute(
+                              builder: (context) => Detail_barang()),
                         );
                       },
                       child: Container(
@@ -207,9 +242,11 @@ class ShoeStoreHome extends StatelessWidget {
                               child: Container(
                                 decoration: BoxDecoration(
                                   color: Colors.grey[200],
-                                  borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+                                  borderRadius: const BorderRadius.vertical(
+                                      top: Radius.circular(8)),
                                   image: const DecorationImage(
-                                    image: AssetImage('assets/adidasjuramo.jpg'),
+                                    image:
+                                        AssetImage('assets/adidasjuramo.jpg'),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -226,11 +263,13 @@ class ShoeStoreHome extends StatelessWidget {
                                   ),
                                   Text(
                                     'Adidas Juramo Speed',
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     'Rp 1.589.000',
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -305,7 +344,8 @@ class ShoeStoreHome extends StatelessWidget {
   }
 }
 
-class ScanQR extends StatelessWidget { // Pastikan menggunakan huruf kapital
+class ScanQR extends StatelessWidget {
+  // Pastikan menggunakan huruf kapital
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -318,7 +358,9 @@ class ScanQR extends StatelessWidget { // Pastikan menggunakan huruf kapital
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Spacer(),
-                const Text('QR', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                const Text('QR',
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 const Spacer(), // Menjaga jarak di kanan agar QR tetap di tengah
                 IconButton(
                   icon: const Icon(Icons.arrow_back),
@@ -365,7 +407,8 @@ class ScanQR extends StatelessWidget { // Pastikan menggunakan huruf kapital
                     print("Gallery icon tapped");
                     // Tambahkan logika untuk fitur galeri
                   },
-                  child: Image.asset('assets/galery.jpg', width: 24, height: 24),
+                  child:
+                      Image.asset('assets/galery.jpg', width: 24, height: 24),
                 ),
               ],
             ),
