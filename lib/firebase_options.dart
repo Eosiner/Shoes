@@ -53,11 +53,12 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBst-Rp1rplnp3M0NpITSPWuliupM6A3_c',
-    appId: '1:501161790234:android:71585ec4f64c38d8207aa3',
-    messagingSenderId: '501161790234',
-    projectId: 'shoes-b723c',
-    storageBucket: 'shoes-b723c.appspot.com',
+    apiKey: 'AIzaSyBMHu4n9VfD-uJlXb1p6FvMfANpzmrm07I',
+    appId: '1:22656980918:android:c6f9ac60bbbae837f79317',
+    messagingSenderId: '22656980918',
+    projectId: 'shoes-a322d',
+    databaseURL: 'https://shoes-a322d-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'shoes-a322d.appspot.com',
   );
 
 }
