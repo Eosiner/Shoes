@@ -55,6 +55,7 @@ class _SignUpAuth extends State<Signup> {
       'name': name,
       'email': email,
       'photoURL': photoURL ?? '',
+      'role':  'user',
     });
   }
 

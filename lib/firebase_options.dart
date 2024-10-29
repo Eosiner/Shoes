@@ -53,11 +53,10 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBMHu4n9VfD-uJlXb1p6FvMfANpzmrm07I',
+    apiKey: 'AIzaSyCVSlxnopD-TwwebfA0294S3cvAJn_q0mc',
     appId: '1:22656980918:android:c6f9ac60bbbae837f79317',
     messagingSenderId: '22656980918',
     projectId: 'shoes-a322d',
-    databaseURL: 'https://shoes-a322d-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'shoes-a322d.appspot.com',
   );
 
