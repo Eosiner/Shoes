@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shoes/views/Checkoutconfirmation.dart';
-import 'package:shoes/views/alamat.dart';
-import 'package:shoes/views/Voucher.dart';
+import 'package:shoes/views/belanja/Checkoutconfirmation.dart';
+import 'package:shoes/views/setting/alamat.dart';
+import 'package:shoes/views/belanja/Voucher.dart';
 
 class detailcheckout extends StatelessWidget {
   const detailcheckout({super.key});

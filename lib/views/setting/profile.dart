@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shoes/views/signinempty.dart';
-import 'package:shoes/views/alamat.dart';
-import 'package:shoes/views/editprofil.dart';
-import 'package:shoes/views/keranjang_fill.dart';
+import 'package:shoes/views/logreg/signinempty.dart';
+import 'package:shoes/views/setting/alamat.dart';
+import 'package:shoes/views/setting/editprofil.dart';
+import 'package:shoes/views/belanja/keranjang_fill.dart';
 
 class Profile extends StatelessWidget {
   final String userID;

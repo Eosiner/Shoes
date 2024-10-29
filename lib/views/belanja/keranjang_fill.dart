@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoes/views/detailcheckout.dart';
+import 'package:shoes/views/belanja/detailcheckout.dart';
 
 class keranjang_fill extends StatelessWidget {
   const keranjang_fill({super.key});

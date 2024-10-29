@@ -4,7 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shoes/views/signinempty.dart';
+import 'package:shoes/views/logreg/signinempty.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});

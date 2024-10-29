@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shoes/views/keranjang_fill.dart';
-import 'package:shoes/views/profile.dart';
-import 'package:shoes/views/scanqr.dart';
-import 'detail_barang.dart';
-import 'package:shoes/views/pesan.dart';
+import 'package:shoes/views/belanja/keranjang_fill.dart';
+import 'package:shoes/views/setting/profile.dart';
+import 'package:shoes/views/qr/scanqr.dart';
+import 'belanja/detail_barang.dart';
+import 'package:shoes/views/messages/pesan.dart';
 
 // void main() {
 //   runApp(const Home());

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoes/views/pinpointalamat.dart';
+import 'package:shoes/views/setting/pinpointalamat.dart';
 
 class alamat extends StatelessWidget {
   const alamat({super.key});

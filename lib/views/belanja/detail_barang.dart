@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/components/popup_add_chart.dart';
 
-import 'Home.dart';
+import '../Home.dart';
 
 
 // void main()

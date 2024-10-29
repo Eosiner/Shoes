@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shoes/views/signinempty.dart';
-import 'package:shoes/views/signupwphoto.dart';
+import 'package:shoes/views/logreg/signinempty.dart';
+import 'package:shoes/views/logreg/signupwphoto.dart';
 
 
 class confirmationsignup extends StatelessWidget {

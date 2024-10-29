@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes/views/Home.dart';
-import 'package:shoes/views/Inbox.dart'; // Import the inbox view
+import 'package:shoes/views/qr/Inbox.dart'; // Import the inbox view
 
 class scanqr extends StatelessWidget {
   const scanqr({super.key});

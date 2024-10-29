@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoes/views/keranjang_fill.dart';
+import 'package:shoes/views/belanja/keranjang_fill.dart';
 
 class SuccessDialog extends StatelessWidget {
   @override

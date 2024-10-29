@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoes/views/forgotpassfound.dart';
+import 'package:shoes/views/logreg/forgotpassfound.dart';
 
 class forgotpass extends StatelessWidget {
   const forgotpass({super.key});

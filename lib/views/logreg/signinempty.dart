@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shoes/views/Home.dart';
-import 'package:shoes/views/forgotpass.dart';
-import 'package:shoes/views/signup.dart';
+import 'package:shoes/views/logreg/forgotpass.dart';
+import 'package:shoes/views/logreg/signup.dart';
 
 class signinempty extends StatelessWidget {
   const signinempty({super.key});

@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes/firebase_options.dart';
-import 'package:shoes/views/splashscreen.dart';
+import 'package:shoes/views/Splashscreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
