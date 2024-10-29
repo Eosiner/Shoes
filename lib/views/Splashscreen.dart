@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shoes/views/Home.dart';
-import 'package:shoes/views/admin/newproduct_page.dart';
 import 'package:shoes/views/signinempty.dart';
 import 'package:shoes/views/signup.dart';
 
