@@ -1,5 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:shoes/service/firebase_Service.dart';
+// import 'package:shoes/service/firebase_Service.dart';
 
 class DaftarSellerPage extends StatefulWidget {
   final String userID; // ID pengguna yang akan dijadikan ID dokumen di koleksi "shops"
@@ -13,7 +14,24 @@ class _DaftarSellerPageState extends State<DaftarSellerPage> {
   final _formKey = GlobalKey<FormState>();
   final _shopNameController = TextEditingController();
   final _shopAddressController = TextEditingController();
-  final FirebaseService _firebaseService = FirebaseService();
+  // final FirebaseService _firebaseService = FirebaseService();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  
+
+  Future<void> registerSeller(
+      String userID, String shopName, String shopAddress) async {
+    // Menambahkan toko
+    await _firestore.collection('shops').doc(userID).set({
+      'shopName': shopName,
+      'shopAddress': shopAddress,
+      'createdAt': Timestamp.now(),
+    });
+
+    // Merubah role user
+    await _firestore.collection('users').doc(userID).update({
+      'role': 'seller',
+    });
+  }
 
   Future<void> _registerSeller() async {
     if (_formKey.currentState!.validate()) {
@@ -21,7 +39,7 @@ class _DaftarSellerPageState extends State<DaftarSellerPage> {
       String shopAddress = _shopAddressController.text.trim();
 
       // Simpan data toko dan ubah role menjadi seller
-      await _firebaseService.registerSeller(widget.userID, shopName, shopAddress);
+      await registerSeller(widget.userID, shopName, shopAddress);
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Pendaftaran sebagai seller berhasil!')),

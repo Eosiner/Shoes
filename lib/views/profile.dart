@@ -18,9 +18,10 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   String roleUser = '';
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> getUserRole() async {
-    DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+    DocumentSnapshot userSnapshot = await _firestore
         .collection('users')
         .doc(widget.userID)
         .get();
