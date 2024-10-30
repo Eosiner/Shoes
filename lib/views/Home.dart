@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shoes/views/belanja/keranjang_fill.dart';
@@ -29,6 +30,7 @@ class _HomeState extends State<Home> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      print(index);
     });
   }
 
@@ -98,6 +100,9 @@ class _HomeState extends State<Home> {
 }
 
 class ShoeStoreHome extends StatelessWidget {
+  ShoeStoreHome({super.key});
+
+  var userID; // Declare userID
   final List<String> categories = [
     'All Shoes',
     'Running',
@@ -106,238 +111,312 @@ class ShoeStoreHome extends StatelessWidget {
     'Hiking'
   ];
 
-  final List<Map<String, String>> forUcupProducts = [
-    {
-      'name': 'Air Jordan Luka 2',
-      'category': 'Basketball',
-      'price': 'Rp 2.199.000',
-      'image': 'assets/airjordanluka2.jpg',
-    },
-    {
-      'name': 'Adidas Response Runner',
-      'category': 'Running',
-      'price': 'Rp 850.000',
-      'image': 'assets/response_runner.jpg',
-    },
-    {
-      'name': 'Nike Zoom Fly',
-      'category': 'Running',
-      'price': 'Rp 1.500.000',
-      'image': 'assets/nike_zoom_fly.jpg',
-    },
-    {
-      'name': 'Puma Hybrid Astro',
-      'category': 'Training',
-      'price': 'Rp 1.299.000',
-      'image': 'assets/puma_hybrid_astro.jpg',
-    },
-    {
-      'name': 'Reebok Nano X2',
-      'category': 'Training',
-      'price': 'Rp 1.800.000',
-      'image': 'assets/reebok_nano_x2.jpg',
-    },
-  ];
+  Future<String?> getUserID() async {
+    final prefs = await SharedPreferences.getInstance();
+    userID = prefs.getString('userID');
+    return userID;
+  }
+
+  // Fungsi untuk mengambil data produk dari Firestore
+  Future<List<Map<String, dynamic>>> getProductsFromFirestore() async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    List<Map<String, dynamic>> products = [];
+    try {
+      QuerySnapshot shopsSnapshot = await firestore.collection('shops').get();
+
+      if (shopsSnapshot.docs.isEmpty) {
+        print("Tidak toko ditemukan!");
+        return [];
+      }
+
+      for (var shopDoc in shopsSnapshot.docs) {
+        String shopId = shopDoc.id;
+        print("Mengambil produk dari toko $shopId");
+
+        QuerySnapshot productsSnapshot = await firestore
+            .collection('shops')
+            .doc(shopId)
+            .collection('products')
+            .get();
+
+        if (productsSnapshot.docs.isEmpty) {
+          print("Tidak ada produk pada toko $shopId");
+        }
+
+        for (var doc in productsSnapshot.docs) {
+          Map<String, dynamic> productData = doc.data() as Map<String, dynamic>;
+          productData['shopId'] = shopId;
+          products.add(productData);
+        }
+      }
+    } catch (e) {
+      print("Error loading products: $e");
+    }
+    return products;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+        child: FutureBuilder(
+          future: getUserID(), // Get userID before building
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasError) {
+              return const Center(child: Text("Error loading user data"));
+            }
+
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: FutureBuilder<DocumentSnapshot>(
+                    future: FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(userID)
+                        .get(),
+                    builder: (context, userSnapshot) {
+                      if (userSnapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      if (userSnapshot.hasError || !userSnapshot.hasData) {
+                        return const Text("Error loading user data");
+                      }
+
+                      var userData = userSnapshot.data!;
+                      print("User id: ${userID}");
+                      print("data: ${userData},");
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Hallo, ${userData['name'] ?? 'Ucup'}', // Using userData['name'] for personalization
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                '@${userData['name'] ?? 'ucup'}',
+                                style: const TextStyle(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundImage: userData['photoURL'] != null
+                                ? NetworkImage(userData['photoURL'])
+                                : const AssetImage(
+                                    'assets/default_profile.jpeg'),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                  height: 40,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: categories.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Chip(
+                          backgroundColor:
+                              index == 0 ? Colors.blue : Colors.grey[200],
+                          label: Text(
+                            categories[index],
+                            style: TextStyle(
+                              color: index == 0 ? Colors.white : Colors.black,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Row(
                     children: [
                       Text(
-                        'Hallo, Ucup',
+                        'Popular Products',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        '@ucup',
-                        style: TextStyle(
-                          color: Colors.grey,
                         ),
                       ),
                     ],
                   ),
-                  CircleAvatar(
-                    backgroundImage: AssetImage('assets/ppgojo.jpg'),
-                    radius: 25,
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: 40,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: categories.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Chip(
-                      backgroundColor:
-                          index == 0 ? Colors.blue : Colors.grey[200],
-                      label: Text(
-                        categories[index],
-                        style: TextStyle(
-                          color: index == 0 ? Colors.white : Colors.black,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  Text(
-                    'Popular Products',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: 200,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      // Use GestureDetector to capture tap events
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Detail_barang()),
-                        );
-                      },
-                      child: Container(
-                        width: 150,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey[300]!),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(8)),
-                                  image: const DecorationImage(
-                                    image:
-                                        AssetImage('assets/adidasjuramo.jpg'),
-                                    fit: BoxFit.cover,
+                ),
+                Container(
+                  height: 200,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 3,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Detail_barang()),
+                            );
+                          },
+                          child: Container(
+                            width: 150,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey[300]!),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[200],
+                                      borderRadius: const BorderRadius.vertical(
+                                          top: Radius.circular(8)),
+                                      image: const DecorationImage(
+                                        image: AssetImage(
+                                            'assets/adidasjuramo.jpg'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Hiking',
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                      Text(
+                                        'Adidas Juramo Speed',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        'Rp 1.589.000',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                            const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Hiking',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                  Text(
-                                    'Adidas Juramo Speed',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    'Rp 1.589.000',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  Text(
-                    'For Ucup',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                      );
+                    },
                   ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: forUcupProducts.length,
-                itemBuilder: (context, index) {
-                  final product = forUcupProducts[index];
-                  return ListTile(
-                    leading: Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                          image: AssetImage(product['image']!),
-                          fit: BoxFit.cover,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        'For Ucup',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                    title: Text(
-                      product['category']!,
-                      style: const TextStyle(color: Colors.grey),
-                    ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          product['name']!,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.black),
-                        ),
-                        Text(
-                          product['price']!,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: FutureBuilder<List<Map<String, dynamic>>>(
+                    future: getProductsFromFirestore(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      if (snapshot.hasError) {
+                        return const Center(
+                            child: Text("Error loading products"));
+                      }
+                      if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        return const Center(child: Text("No products found"));
+                      }
+
+                      List<Map<String, dynamic>> products = snapshot.data!;
+
+                      return ListView.builder(
+                        itemCount: products.length,
+                        itemBuilder: (context, index) {
+                          final product = products[index];
+                          return ListTile(
+                            leading: Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: product['images'] != null &&
+                                      product['images'].isNotEmpty
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.network(
+                                        product['images'][
+                                            0], // Ambil gambar pertama dari list URL
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : const Icon(Icons.image_not_supported),
+                            ),
+                            title: Text(
+                              product['type'] ?? 'No Category',
+                              style: const TextStyle(color: Colors.grey),
+                            ),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  product['name'] ?? 'No Name',
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),
+                                Text(
+                                  (product['price'] != null
+                                      ? "Rp ${product['price'].toString()}"
+                                      : 'No Price'),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
