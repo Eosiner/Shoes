@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shoes/views/belanja/keranjang_fill.dart';
 import 'package:shoes/views/setting/profile.dart';
@@ -75,19 +76,24 @@ class _HomeState extends State<Home> {
                     onTap: _onItemTapped, // Menangani pergantian halaman
                     items: const [
                       BottomNavigationBarItem(
-                          icon: ImageIcon(AssetImage('assets/home.jpg')),
+                          // icon: ImageIcon(AssetImage('assets/home.jpg')),
+                          icon: Icon(Icons.home),
                           label: ''),
                       BottomNavigationBarItem(
-                          icon: ImageIcon(AssetImage('assets/pesan.jpg')),
+                          // icon: ImageIcon(AssetImage('assets/pesan.jpg')),
+                          icon: Icon(Icons.message),
                           label: ''),
                       BottomNavigationBarItem(
-                          icon: ImageIcon(AssetImage('assets/qrcode.jpg')),
+                          // icon: ImageIcon(AssetImage('assets/qrcode.jpg')),
+                          icon: Icon(Icons.qr_code),
                           label: ''),
                       BottomNavigationBarItem(
-                          icon: ImageIcon(AssetImage('assets/keranjang.jpg')),
+                          // icon: ImageIcon(AssetImage('assets/keranjang.jpg')),
+                          icon: Icon(Icons.shopping_cart),
                           label: ''),
                       BottomNavigationBarItem(
-                          icon: ImageIcon(AssetImage('assets/person.jpg')),
+                          // icon: ImageIcon(AssetImage('assets/person.jpg')),
+                          icon: Icon(Icons.person),
                           label: ''),
                     ],
                   )
@@ -101,7 +107,7 @@ class _HomeState extends State<Home> {
 
 class ShoeStoreHome extends StatelessWidget {
   ShoeStoreHome({super.key});
-
+  
   var userID; // Declare userID
   final List<String> categories = [
     'All Shoes',
@@ -146,12 +152,14 @@ class ShoeStoreHome extends StatelessWidget {
         for (var doc in productsSnapshot.docs) {
           Map<String, dynamic> productData = doc.data() as Map<String, dynamic>;
           productData['shopId'] = shopId;
+          productData['productId'] = doc.id;
           products.add(productData);
         }
       }
     } catch (e) {
       print("Error loading products: $e");
     }
+    // print(products);
     return products;
   }
 
@@ -170,6 +178,7 @@ class ShoeStoreHome extends StatelessWidget {
               return const Center(child: Text("Error loading user data"));
             }
 
+            var userName;
             return Column(
               children: [
                 Padding(
@@ -189,8 +198,10 @@ class ShoeStoreHome extends StatelessWidget {
                       }
 
                       var userData = userSnapshot.data!;
-                      print("User id: ${userID}");
-                      print("data: ${userData},");
+                      userName = userData['name'];
+                      // print(userName);
+                      // print("User id: ${userID}");
+                      // print("data: ${userData},");
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -269,13 +280,13 @@ class ShoeStoreHome extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Detail_barang()),
-                            );
-                          },
+                          // onTap: () {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => Detail_barang()),
+                          //   );
+                          // },
                           child: Container(
                             width: 150,
                             decoration: BoxDecoration(
@@ -335,7 +346,7 @@ class ShoeStoreHome extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        'For Ucup',
+                        'For You',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -408,6 +419,13 @@ class ShoeStoreHome extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Detail_barang(productId: product['productId'], shopId: product['shopId'],)),
+                            );
+                          },
                           );
                         },
                       );
