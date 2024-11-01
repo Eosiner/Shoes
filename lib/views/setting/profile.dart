@@ -241,9 +241,9 @@ class _ProfileState extends State<Profile> {
             },
           ),
           ListTile(
-            title: const Text('RateApp'),
+            title: const Text('Logout'),
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-            onTap: () {
+            onTap: () {logout(context);
               // Aksi RateApp
             },
           ),
