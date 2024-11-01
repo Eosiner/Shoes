@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shoes/views/belanja/keranjang_fill.dart';
 import 'package:shoes/views/setting/profile.dart';
 import 'package:shoes/views/qr/scanqr.dart';
 import 'belanja/detail_barang.dart';
-import 'package:shoes/views/messages/pesan.dart';
+
+import 'messages/chatscreen.dart';
 
 // void main() {
 //   runApp(const Home());
@@ -55,7 +55,7 @@ class _HomeState extends State<Home> {
         // Buat halaman berdasarkan userID yang telah diambil
         final List<Widget> _pages = [
           ShoeStoreHome(),
-          pesan(),
+          ChatScreen(),
           const scanqr(),
           const keranjang_fill(),
           Profile(userID: userID ?? ''), // Berikan userID ke halaman Profile
@@ -107,7 +107,7 @@ class _HomeState extends State<Home> {
 
 class ShoeStoreHome extends StatelessWidget {
   ShoeStoreHome({super.key});
-  
+
   var userID; // Declare userID
   final List<String> categories = [
     'All Shoes',

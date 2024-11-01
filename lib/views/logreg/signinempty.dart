@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,6 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Fungsi untuk login
   Future<void> _login() async {
@@ -56,7 +58,10 @@ class _SignInScreenState extends State<SignInScreen> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isLoggedIn', true);
         await prefs.setString('userID', userCredential.user?.uid ?? '');
-
+        _firestore
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set({'uid': userCredential.user!.uid, 'email': email}, SetOptions(merge: true));
         // Navigasi ke halaman Home jika login berhasil
         Navigator.pushReplacement(
           context,
